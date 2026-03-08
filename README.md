@@ -28,7 +28,7 @@ npm test
 
 ## Design decisions
 
-**Adapter pattern /n**
+**Adapter pattern**
 
 RatingService depends only on the CarrierAdapter interface injected 
 via CARRIER_ADAPTERS token. It has no UPS imports, no UPS types, 
