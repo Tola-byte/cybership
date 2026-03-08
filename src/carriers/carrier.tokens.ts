@@ -1,0 +1,1 @@
+export const CARRIER_ADAPTERS = "CARRIER_ADAPTERS";
