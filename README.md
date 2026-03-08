@@ -28,7 +28,8 @@ npm test
 
 ## Design decisions
 
-**Adapter pattern**
+**Adapter pattern /n**
+
 RatingService depends only on the CarrierAdapter interface injected 
 via CARRIER_ADAPTERS token. It has no UPS imports, no UPS types, 
 no UPS anything. Adding FedEx means creating src/carriers/fedex/, 
@@ -36,6 +37,7 @@ implementing CarrierAdapter, registering it as a provider.
 Zero changes to RatingService.
 
 **Auth as a separate service**
+
 UpsAuthService owns the entire OAuth lifecycle — token acquisition, 
 in-memory caching, expiry checking, and refresh. UpsRatingAdapter 
 just calls getAccessToken() and gets a valid token back. 
@@ -48,12 +50,14 @@ wait on the same promise rather than triggering parallel
 token requests.
 
 **Circuit breaker placement**
+
 The breaker wraps the entire UPS lookup execution in UpsRatingAdapter, 
 not just the HTTP call. That means auth failures, mapping errors, 
 and network failures all contribute to tripping the circuit — 
 not just the rating endpoint itself.
 
 **Validation before external calls**
+
 RateRequest is validated with Zod before any HTTP call is made. 
 Bad input throws a structured ValidationError immediately 
 and never reaches UPS.
